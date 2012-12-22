@@ -12,9 +12,7 @@
 # 
 #    For information : stephane.mouchon@laposte.net
 #    Created : 01/dec/2012
-#
-#    http://wiki.mycases.ro
-#
+#    version 0.3
 ###################################################################
 
 RETURN=0
