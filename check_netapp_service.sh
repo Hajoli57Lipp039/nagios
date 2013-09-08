@@ -281,7 +281,7 @@ STATUT=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID_STATE  | awk '{print $4}'
 if [[ $STATUT -eq 2 ]] ;
 then 
 LABEL_OUT_OK="le service snapvault est actif"
-elif [[ $STATUS != 2 ]] ; then
+elif [[ $STATUT != 2 ]] ; then
 LABEL_OUT_ERR="Le service snapvault est inactif"
 RETURN=2		
 fi
@@ -297,7 +297,7 @@ STATUT=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID_STATE  | awk '{print $4}'
 
 if [[ $STATUT == 2 ]] ;then 
 LABEL_OUT_OK="le service snapmirror est actif"
-elif [[ $STATUS != 2 ]] ; then
+elif [[ $STATUT != 2 ]] ; then
 LABEL_OUT_ERR="Le service snapmirror est inactif"
 RETURN=2		
 fi
@@ -313,7 +313,7 @@ STATUT=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID_STATE  | awk '{print $4}'
 
 if [[ $STATUT == 2 ]] ;then 
 LABEL_OUT_OK="le service ndmp est actif"
-elif [[ $STATUS != 2 ]] ; then
+elif [[ $STATUT != 2 ]] ; then
 LABEL_OUT_ERR="Le service ndmp est inactif"
 RETURN=2		
 fi
@@ -329,7 +329,7 @@ STATUT=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID_STATE  | awk '{print $4}'
 
 if [[ $STATUT == 2 ]] ; then 
 LABEL_OUT_OK="le service cifs est actif"
-elif [[ $STATUS != 2 ]] ; then
+elif [[ $STATUT != 2 ]] ; then
 LABEL_OUT_ERR="Le service cifs est inactif"
 RETURN=2		
 fi
@@ -346,7 +346,7 @@ STATUT=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID_STATE  | awk '{print $4}'
 if [[ $STATUT == 2 ]] ; then 
 LABEL_OUT_OK="le service cf est en etat OK"
 
-elif [[ $STATUS != 2 ]] ; then
+elif [[ $STATUT != 2 ]] ; then
 LABEL_OUT_ERR="Le takeOver est active "
 RETURN=2		
 fi
