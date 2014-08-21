@@ -207,19 +207,27 @@ i=0
 let "CRITICAL *=3600"
 let "WARNING *=3600"
 
-SNAPVAULT_LAG=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID | cut -d'(' -f 2 | cut -d')' -f1) || exit_return RETURN=${EXIT_CODE_UNKNOWN}
+#SNAPVAULT_LAG=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID | cut -d'(' -f 2 | cut -d')' -f1) || exit_return RETURN=${EXIT_CODE_UNKNOWN}
+SNAPVAULT_LAG=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID) || exit_return RETURN=${EXIT_CODE_UNKNOWN}
 SNAPVAULT_NAME=$(snmpwalk -v $VERSION -c $COMMUNITY $HOST $OID_NAME | cut -d'.' -f 8- ) || exit_return RETURN=${EXIT_CODE_UNKNOWN}
 
-for LAG in $SNAPVAULT_LAG
+# use newline instat whitespace as seperator in the for loop
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+for LAGtor in $SNAPVAULT_LAG
 do 
 	#modification du format centieme de seconde fournit la sonde
+	LAG=$(echo "${LAGtor}"| cut -d'(' -f 2 | cut -d')' -f1 )
 	let LAG=${LAG}/100
 	let STAMP_HEURE=$LAG/3600	
 	# l'index commence a 1 egalement dans l OID snmp
 	let "i++"
 		if [[ $LAG -gt $CRITICAL ]] ; then
 			#recuperation des noms des snapmirrors
-			NAME_SNAPVAULT=$(echo "$SNAPVAULT_NAME"| grep -w $i | cut -d' ' -f4-5 )
+			let LAGi=$(echo "${LAGtor}"| cut -d'=' -f1 |cut -d'.' -f 8 )
+			NAME_SNAPVAULT=$(echo "$SNAPVAULT_NAME"| grep -w $LAGi | cut -d' ' -f4-5 )
 			LABEL_OUT_ERR=$(echo ${LABEL_OUT_ERR} "lag de ${STAMP_HEURE}H sur ${NAME_SNAPVAULT} $COMA")
 			CHECK_CRIT=1
 		elif [[ $LAG -gt $WARNING ]] ; then
