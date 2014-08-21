@@ -198,7 +198,7 @@ exit_return
 }
 
 function get_snapvault_lag() {
-
+# some corrections has been advised by Torsten Eymann (DE). Thanks to him.
 OID=".1.3.6.1.4.1.789.1.19.11.1.6"
 OID_NAME=".1.3.6.1.4.1.789.1.19.11.1.2"
 
