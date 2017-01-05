@@ -10,7 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # 
-#    For information : stephane.mouchon@laposte.net
+#    For information : petman_fr@gmail.com
 #    Created : 01/dec/2012
 #    version 0.3
 ###################################################################
